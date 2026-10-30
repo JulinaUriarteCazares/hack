@@ -31,7 +31,7 @@ export const MUNICIPIOS = [
   ["General Plutarco Elías Calles","Uriel López Ríos","Morena","Ganó con el Partido Sonorense; se pasó a Morena en 2025."],
   ["Granados","José Vinicio Durazo Durazo","MC"],
   ["Guaymas","Karla Córdova González","Morena"],
-  ["Hermosillo","Antonio Astiazarán Gutiérrez","PAN","El alcalde busca la gubernatura. Ver su ficha en la pestaña Gubernatura."],
+  ["Hermosillo","Antonio Astiazarán Gutiérrez","PAN","El alcalde busca la gubernatura. Ver su ficha en la pestaña Gobernador."],
   ["Huachinera","Samuel Dávila Ballesteros","Morena","Ganó con el Partido Sonorense; se pasó a Morena en 2025."],
   ["Huásabas","Jesús Alberto Urquijo Ramírez","Nueva Alianza"],
   ["Huatabampo","Alberto Vázquez Valencia","PT"],
