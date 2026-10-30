@@ -1,3 +1,9 @@
+<!doctype html>
+<html lang="es">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f4f5f2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#141917" media="(prefers-color-scheme: dark)">
 <title>¿Quién quiere gobernar Sonora?</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="Lo que se les critica a quienes quieren gobernar Sonora, tu municipio y tu distrito en 2027.">
@@ -34,6 +40,7 @@
   color-scheme:dark;
 }
 *{box-sizing:border-box}
+[hidden]{display:none !important}
 html{font-size:106.25%}
 html.big{font-size:125%}
 body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:1.05rem;line-height:1.65;
@@ -202,14 +209,51 @@ tbody tr:last-child th,tbody tr:last-child td{border-bottom:0}
 .links a:hover{border-color:var(--sun);color:var(--ink)}
 footer{border-top:1px solid var(--line);padding-top:var(--s5);display:flex;flex-direction:column;gap:var(--s3);font-size:.88rem;color:var(--muted)}
 
+/* Resumen y glosario */
+.summary{background:var(--surface);border:2px solid var(--ink);border-radius:8px;padding:var(--s4) var(--s5);display:flex;flex-direction:column;gap:var(--s3)}
+.summary ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:var(--s2)}
+.summary li{display:grid;grid-template-columns:1.6rem 1fr;gap:var(--s2)}
+.summary li::before{content:"✓";font-family:var(--f-data);color:var(--sun);font-weight:500}
+.countdown{font-family:var(--f-data);font-size:1.3rem;font-weight:500;line-height:1.2;color:var(--sun)}
+.glossary{margin:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s3)}
+.glossary div{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:var(--s3) var(--s4)}
+.glossary dt{font-family:var(--f-display);font-weight:600}
+.glossary dd{margin:0;font-size:.92rem}
+.polls{border-left:5px solid var(--sun);background:var(--surface);border-radius:6px;padding:var(--s4);display:flex;flex-direction:column;gap:var(--s2)}
+
+/* Comparación en tarjetas (solo celular) */
+.compare-cards{display:none;flex-direction:column;gap:var(--s3)}
+.cc{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--pc);border-radius:8px;padding:var(--s4);display:flex;flex-direction:column;gap:var(--s2)}
+.cc dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:var(--s1) var(--s3);font-size:.92rem}
+.cc dt{font-family:var(--f-display);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);padding-top:.25rem}
+.cc dd{margin:0}
+
 @media (max-width: 860px){
   .d-head,.two{grid-template-columns:1fr}
   .picker{grid-template-columns:repeat(2,minmax(0,1fr))}
   .guide,.links,.roles,.howto{grid-template-columns:1fr}
   .muni-grid{grid-template-columns:1fr 1fr}
 }
+@media (max-width: 640px){
+  html{font-size:100%}
+  .wrap{gap:var(--s5);padding-top:var(--s4)}
+  .lead{font-size:1.05rem}
+  .status{font-size:.75rem}
+  /* Las 4 pestañas caben a la vez en el teléfono */
+  .tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s1);overflow:visible}
+  .tab{flex-direction:column;justify-content:center;gap:.2rem;padding:.45rem .2rem;font-size:.78rem;line-height:1.15;white-space:normal;text-align:center;border-radius:10px}
+  .table-wrap{display:none}
+  .compare-cards{display:flex}
+  .glossary{grid-template-columns:1fr}
+  .tools .btn{flex:1 1 auto;justify-content:center}
+  .next-row .btn{width:100%;justify-content:center}
+  .notice{padding:var(--s4)}
+}
 @media (max-width: 480px){
   .timeline li,.flag .row{grid-template-columns:1fr;gap:2px}
+  .picker{gap:var(--s2)}
+  .pick{padding:var(--s3)}
+  .pick .name{font-size:.95rem}
   .d-head,.d-body,.muni-card{padding:var(--s4)}
   .muni-grid{grid-template-columns:1fr}
 }
@@ -222,7 +266,7 @@ footer{border-top:1px solid var(--line);padding-top:var(--s5);display:flex;flex-
 <div class="wrap">
   <header class="stack">
     <div class="status">
-      <span><span class="dot"></span><b>Actualizado: 26 de octubre de 2026</b></span>
+      <span><span class="dot"></span><b>Actualizado: 29 de octubre de 2026</b></span>
       <span>Elección: 6 de junio de 2027</span>
       <span>Se elige: gubernatura, 72 alcaldías, diputaciones locales y federales</span>
     </div>
@@ -232,6 +276,17 @@ footer{border-top:1px solid var(--line);padding-top:var(--s5);display:flex;flex-
       <strong>Todavía no hay candidatos oficiales.</strong>
       <p>Hoy son aspirantes. Los partidos los eligen entre ahora y principios de 2027, y el registro formal es ante el IEE Sonora. Una acusación no es una condena: por eso indicamos si hubo proceso legal o solo es un señalamiento.</p>
     </div>
+    <section class="summary" aria-labelledby="sum-h">
+      <p class="countdown" id="countdown"></p>
+      <h2 id="sum-h" style="font-size:1.25rem">En 1 minuto</h2>
+      <ul>
+        <li><span>El <b>6 de junio de 2027</b> eliges gobernador, alcalde y diputados.</span></li>
+        <li><span>Hoy nadie es candidato oficial: son <b>aspirantes</b>.</span></li>
+        <li><span>Morena ya eligió a <b>Lorenia Valles</b>. Va arriba en las encuestas.</span></li>
+        <li><span>En la oposición suenan <b>Astiazarán</b> (PAN), <b>Colosio</b> (MC) y <b>Gándara</b> (PRI).</span></li>
+        <li><span>Para cada uno te mostramos primero <b>lo que se le critica</b>, con su fuente.</span></li>
+      </ul>
+    </section>
     <div class="stack" style="gap:var(--s3)">
       <h2>Cómo usar esta página</h2>
       <ol class="howto">
@@ -244,6 +299,17 @@ footer{border-top:1px solid var(--line);padding-top:var(--s5);display:flex;flex-
         <button class="btn" id="readAloud" hidden>▶ Escuchar la ficha</button>
       </div>
     </div>
+    <details class="more">
+      <summary>Palabras que vas a ver</summary>
+      <dl class="glossary" style="margin-top:var(--s3)">
+        <div><dt>Aspirante</dt><dd>Quiere ser candidato, pero su partido todavía no lo registra.</dd></div>
+        <div><dt>Coordinador(a)</dt><dd>Nombre que usa Morena para quien casi seguro será su candidato.</dd></div>
+        <div><dt>Pedir licencia</dt><dd>Dejar un cargo por un tiempo, por ejemplo para hacer campaña.</dd></div>
+        <div><dt>Plurinominal</dt><dd>Diputado que no aparece en tu boleta: el partido lo asigna según sus votos.</dd></div>
+        <div><dt>Alianza</dt><dd>Dos o más partidos que se juntan para lanzar al mismo candidato.</dd></div>
+        <div><dt>Encuesta</dt><dd>Pregunta a un grupo de personas. Da una idea, no el resultado final.</dd></div>
+      </dl>
+    </details>
   </header>
 
   <nav class="tabs" role="tablist" aria-label="Secciones">
@@ -270,6 +336,14 @@ footer{border-top:1px solid var(--line);padding-top:var(--s5);display:flex;flex-
     <div class="stack">
       <h2>Los cuatro, lado a lado</h2>
       <div class="table-wrap"><table id="compare"></table></div>
+      <div class="compare-cards" id="compareCards"></div>
+    </div>
+
+    <div class="polls">
+      <h3>¿Cómo van?</h3>
+      <p>Una encuesta de CE Research (19 de octubre de 2026) pone a Lorenia Valles adelante por <b>8 a 11 puntos</b>. La diferencia depende de si el PAN y el PRI se juntan.</p>
+      <p>Esa alianza aún no está decidida. El PAN nacional dijo por meses que iría solo, pero en septiembre dejó que cada estado lo analice. Astiazarán la pide para Sonora.</p>
+      <p class="small muted">Una encuesta es una foto del momento, no el resultado. Fuentes: <span id="pollSrc"></span></p>
     </div>
 
     <details class="more">
@@ -400,7 +474,9 @@ const SRC = {
   cajeme:["Tribuna, oct 2026","https://tribuna.com.mx/sonora/2026/10/19/once-aspirantes-buscan-la-candidatura-de-morena-a-la-alcaldia-de-cajeme_704179/"],
   cajemeMega:["Meganoticias, oct 2026","https://www.meganoticias.mx/obregon-navojoa/noticia/once-los-que-buscan-la-candidatura-de-morena-a-alcald%C3%ADa-de-cajeme/780917"],
   nogales:["El Diario de Sonora, oct 2026","https://eldiariodesonora.com.mx/nogales/2026/10/19/morena-cierra-registros-sonora-18-perfiles-buscan-coordinacion-nogales.html"],
-  registroMorena:["El Diario de Sonora, oct 2026","https://eldiariodesonora.com.mx/nogales/2026/10/08/morena-abre-registros-sonora-rumbo-2027-aspirantes-podran-inscribirse-8-18-octubre.html"]
+  registroMorena:["El Diario de Sonora, oct 2026","https://eldiariodesonora.com.mx/nogales/2026/10/08/morena-abre-registros-sonora-rumbo-2027-aspirantes-podran-inscribirse-8-18-octubre.html"],
+  ceOct:["CE Research, oct 2026","https://ceonline.com.mx/sonora-encuesta-estatal-2026-10/"],
+  panAlianzas:["Expansión, sep 2026","https://politica.expansion.mx/mexico/2026/09/07/pan-alianzas-2027"]
 };
 const src = k => `<a href="${SRC[k][1]}" target="_blank" rel="noopener">${SRC[k][0]}</a>`;
 const KIND = {grave:["GRAVE","k-grave"], denuncia:["DENUNCIA","k-denuncia"], critica:["CRÍTICA","k-critica"], hecho:["HECHO","k-hecho"]};
@@ -712,6 +788,9 @@ function renderCompare(){
   ];
   $("#compare").innerHTML = `<thead><tr><th scope="col"><span class="sr">Criterio</span></th>${PEOPLE.map(p=>`<th scope="col">${p.name}</th>`).join("")}</tr></thead>
     <tbody>${rows.map(([h,f])=>`<tr><th scope="row">${h}</th>${PEOPLE.map(p=>`<td>${f(p)}</td>`).join("")}</tr>`).join("")}</tbody>`;
+  $("#compareCards").innerHTML = PEOPLE.map(p=>`<div class="cc" style="--pc:var(${p.pc})"><h3>${p.name}</h3>
+    <dl>${rows.map(([h,f])=>`<dt>${h}</dt><dd>${f(p)}</dd>`).join("")}</dl></div>`).join("");
+  $("#pollSrc").innerHTML = ["ceOct","panAlianzas","alianza"].map(src).join(" · ");
   $("#others").innerHTML = OTHERS.map(([party,c,note,names])=>`<div><span class="party" style="--pc:var(${c})">${party}</span><p class="small"><b>${note}:</b> ${names}</p></div>`).join("")
     + `<p class="mono small muted">Fuentes: ${["expansion","cripesoAgo","rumbo"].map(src).join(" · ")}</p>`;
 }
@@ -809,6 +888,11 @@ if ("speechSynthesis" in window){
     }catch(e){ readBtn.hidden = true; }
   });
 }
+
+/* Cuenta regresiva */
+const today = new Date(); today.setHours(0,0,0,0);
+const days = Math.round((ELECTION - today)/864e5);
+$("#countdown").textContent = days > 0 ? `Faltan ${days} días para votar` : "Ya pasó la elección";
 
 selectPerson("valles"); renderCompare(); renderMunis(); renderGuide();
 const h = (location.hash||"").slice(1);
